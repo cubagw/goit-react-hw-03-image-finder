@@ -32,8 +32,8 @@ class App extends Component {
       .fetchArticles(this.state.query, this.state.pageNumber)
       .then(items => {
         this.setState({
-          photos: [...state.items, ...items],
-          pageNumber: state.pageNumber + 1,
+          photos: [...this.state.photos, ...items],
+          pageNumber: this.state.pageNumber + 1,
         });
       })
       .catch(error => {
