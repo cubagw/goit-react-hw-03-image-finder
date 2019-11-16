@@ -13,28 +13,32 @@ class App extends Component {
     photos: [],
     isLoading: false,
     error: null,
-    pageNumber: 0,
+    pageNumber: 1,
     query: '',
   };
 
   componentDidMount() {}
 
   onSearch = query => {
-    this.setState({
-      query,
-      isLoading: true,
-    });
-    this.fetchItems();
+    this.setState(
+      {
+        query,
+        photos: [],
+        pageNumber:1
+      },
+      this.fetchItems,
+    );
   };
 
   fetchItems = () => {
+    this.setState({ isLoading: true });
     fetchApi
       .fetchArticles(this.state.query, this.state.pageNumber)
       .then(items => {
-        this.setState({
-          photos: [...this.state.photos, ...items],
-          pageNumber: this.state.pageNumber + 1,
-        });
+        this.setState(state => ({
+          photos: [...state.photos, ...items],
+          pageNumber: state.pageNumber + 1,
+        }));
       })
       .catch(error => {
         this.setState({
