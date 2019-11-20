@@ -4,7 +4,8 @@ import T from 'prop-types';
 import styles from './PhotoCard.module.css';
 
 const PhotoCard = ({
-  item: { webformatURL, likes, views, comments, downloads },
+  item: { webformatURL, id, likes, views, comments, downloads },
+  onOpenModal,
 }) => {
   return (
     <li>
@@ -31,7 +32,11 @@ const PhotoCard = ({
         </div>
 
         {/* <!-- Кнопка для открытия модалки с большим изображением, появляется при наведении --> */}
-        <button type="button" className={styles.fullscreen_button}>
+        <button
+          type="button"
+          className={styles.fullscreen_button}
+          onClick={() => onOpenModal(id)}
+        >
           <i className="material-icons">zoom_out_map</i>
         </button>
       </div>
@@ -48,6 +53,7 @@ PhotoCard.propTypes = {
     comments: T.number.isRequired,
     downloads: T.number.isRequired,
   }).isRequired,
+  onOpenModal: T.func.isRequired,
 };
 
 export default PhotoCard;
