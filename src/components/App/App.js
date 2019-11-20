@@ -14,23 +14,23 @@ class App extends Component {
     photos: [],
     isLoading: false,
     error: null,
-    pageNumber: 1,
+    pageNumber: 0,
     isModalOpen: false,
     query: '',
     targetPhoto: '',
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { query, pageNumber } = this.state;
+    const { query, photos } = this.state;
     if (prevState.query !== query) {
       this.fetchItems();
     }
-    console.log(prevState.pageNumber, 'prevState.pageNumber');
-    console.log(pageNumber, 'pageNumber');
+    // console.log(prevState.pageNumber, 'prevState.pageNumber');
+    // console.log(pageNumber, 'pageNumber');
 
-    if (prevState.pageNumber !== pageNumber) {
+    if (prevState.photos !== photos) {
       window.scrollTo({
-        top: pageNumber * 1000,
+        top: document.body.scrollHeight,
         behavior: 'smooth',
       });
     }
